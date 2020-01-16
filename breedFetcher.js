@@ -1,6 +1,7 @@
 const request = require('request');
-const URL = "https://api.thecatapi.com/v1/breeds/search?q=sib";
 const inputBreedName = process.argv[2];
+const searchURL = "https://api.thecatapi.com/v1/breeds/search?q=";
+const URL = searchURL.concat(inputBreedName);
 
 
 request(URL, (error, response, body) => {
@@ -15,14 +16,23 @@ request(URL, (error, response, body) => {
   // console.log('body:', body); // Print the HTML for the Google homepage.
   // console.log(typeof body);
   const data = JSON.parse(body);
+  // console.log(data[0]);
+  const breedObject = data[0];
+  if (breedObject) {
+    const description = breedObject["description"];
+    // console.log(description);
+    console.log(breedObject);
+    
+    console.log(description);
+  } else {
+    console.log("Breed not found");
+  }
+
+ 
+
+
+  
   // console.log(data);
   // console.log(typeof data);
-  const object = data[0];
-  const breedName = object["name"];
-  // console.log(object);
-  if (breedName === inputBreedName) {
-    console.log(object['description']);
-  } else if (object['name'] !== inputBreedName) {
-    console.log(`This is API is for ${breedName}`);
-  }
+
 });

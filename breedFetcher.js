@@ -1,5 +1,5 @@
 const request = require('request');
-const URL = "https://api.thecatapisearch?q=sib";
+const URL = "https://api.thecatapi.com/v1/breeds/search?q=sib";
 const inputBreedName = process.argv[2];
 
 
